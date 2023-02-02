@@ -1,33 +1,38 @@
 import { ColaboratorRepository } from "../Model/Colaborator";
-class Colaborator{
-    constructor(public id: string | null){}
+class Colaborator {
+    constructor(
+        public id: string,
+        public name: string | null,
+        public register: string | null,
+        public email: string | null,
+        public password: string | null,
+        public phone: string | null,
+        public image: string | null,
+        public birthdate: string | null,
+        public office: string | null,
+        public created_at: string | null) { }
 }
 
 export class ColaboratorController {
     constructor(private colaboratorRepository: ColaboratorRepository = new ColaboratorRepository()) { }
-
-    async getColaboratorsByEmail(email: string) {
+    async signin(email: string, password: string) {
         let userData: Colaborator = await this.colaboratorRepository.getColaboratorByEmail(email)
-        if(userData.id == '69083a71-03a4-41d8-8209-0f08c00bdb1f'){
-            return(userData)
+        if (userData.password == password) {
+            return ({ "signup": true, "id": userData.id, "name": userData.name, "birthdate": userData.birthdate })
         }
-        return {error: 'old'}
-        
-    }
-    async signin() {
-        
+        return { "signup": false }
     }
     async signup() {
         
     }
-    async updatePassword(){
+    async updatePassword() {
 
     }
 }
 
-const a = new ColaboratorController()
-const test = async () => {
-    console.log( await a.getColaboratorsByEmail('fake email2'))
-}
+// const a = new ColaboratorController()
+// const test = async () => {
+//     console.log(await a.signin('new@email.com', 'adminie45'))
+// }
 
-test()
+// test()

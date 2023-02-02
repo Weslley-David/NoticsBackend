@@ -1,13 +1,14 @@
 import { supabase } from "./supabase"
 
-export class ColaboratorRepository {
-    getColaboratorByEmail = async (email: string) => {
+export class ClientRepository {
+    findClient = async (field: string, content: string) => {
         const { data, error } = await supabase
-            .from('colaborator')
+            .from('product')
             .select()
-            .eq('email', email)
+            .eq(field, content)
             .single()
         if (error) {
+            console.log(error)
             throw new Error("not fetched")
         }
         return data
