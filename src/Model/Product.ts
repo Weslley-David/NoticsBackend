@@ -1,11 +1,11 @@
-import { supabase } from "./supabase"
+import { supabase, getPagination } from "./supabase"
 
+// const getPagination = async (page: number, quantity: number) => {
+//         quantity = quantity
+//         let start = (page * quantity), final = (page * quantity + quantity - 1)
+//         return { start, final }
+// }
 export class ProductRepository {
-    getPagination(page: number, quantity: number) {
-        quantity = quantity
-        let start = (page * quantity), final = (page * quantity + quantity - 1)
-        return { start, final }
-    }
     findProduct = async (field: string, value: string) => {
         const { data, error } = await supabase
             .from('product')
@@ -19,7 +19,8 @@ export class ProductRepository {
     }
 
     listProducts = async (page: number) => {
-        const { start, final } = this.getPagination(page, 3);
+        const [start, final] = await getPagination(page, 4)
+
         const { data, error } = await supabase
             .from('product')
             .select()
@@ -35,10 +36,7 @@ export class ProductRepository {
 async function teste() {
 
     let a = new ProductRepository()
-    // console.log(a.getPagination(0, 3))
-    // console.log(a.getPagination(1, 3))
-    // console.log(a.getPagination(2, 3))
-    console.log(await a.listProducts(2))
+    console.log(await a.listProducts(1))
 }
 teste()
 
