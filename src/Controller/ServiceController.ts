@@ -19,7 +19,11 @@ export class ProductController {
 
         return (userData)
     }
-    async GetServices() { }
+    async GetServices(page: number) { 
+        let products: Service[] = await this.serviceRepository.listServices(page)
+        return products
+
+    }
 
 }
 

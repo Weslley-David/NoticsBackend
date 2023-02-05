@@ -1,5 +1,5 @@
 import { ProductRepository } from "../Model/Product";
-class Product {
+export class Product {
     constructor(
         public id: string,
         public name: string | null,
@@ -20,13 +20,17 @@ export class ProductController {
 
         return (userData)
     }
-    async GetProducts() { }
+    async GetProducts(page: number) { 
+        let products: Product[] = await this.productRepository.listProducts(page)
+        return products
+
+    }
 
 }
 
 // const a = new ProductController()
 // const test = async () => {
-//     console.log(await a.FindProduct('name', 'placa mãe Asus TX500'))
+//     console.log(await a.GetProducts(1))
 // }
 
 // test()

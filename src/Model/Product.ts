@@ -1,4 +1,5 @@
 import { supabase, getPagination } from "./supabase"
+import { Product } from "./../Controller/ProductController"
 
 // const getPagination = async (page: number, quantity: number) => {
 //         quantity = quantity
@@ -33,12 +34,16 @@ export class ProductRepository {
     }
 }
 
-async function teste() {
+// async function teste() {
 
-    let a = new ProductRepository()
-    console.log(await a.listProducts(1))
-}
-teste()
+//     // let a = new ProductRepository()
+//     // let b = await a.listProducts(1)
+//     // console.log(b)
+//     // let a = new ProductRepository()
+//     // let b: Product[] = await a.listProducts(1)
+//     // console.log(b)
+// }
+// teste()
 
 
 
